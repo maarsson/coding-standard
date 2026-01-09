@@ -25,7 +25,7 @@
             "./vendor/bin/phpmd test/fixtures/Phpmd/GoodCode ansi resources/phpmd.xml.dist --suffixes=php"
         ],
         "ci:phpmd-fails": [
-            "./vendo/bin/phpmd test/fixtures/Phpmd/BadCode ansi resources/phpmd.xml.dist --suffixes=php"
+            "./vendor/bin/phpmd test/fixtures/Phpmd/BadCode ansi resources/phpmd.xml.dist --suffixes=php"
         ]
     },
     "bin": [
