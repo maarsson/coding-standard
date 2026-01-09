@@ -119,7 +119,7 @@ After the sync script runs, `phpmd.xml` will exist in your project root, but you
 
 Then run the PHPMD check like this:
 
-`./vendor/bin/phpmd . ansi phpmd.xml --suffixes=php`
+`./vendor/bin/phpmd . ansi phpmd.xml --suffixes=php --cache --cache-file=.phpmd.cache`
 
 ---
 
