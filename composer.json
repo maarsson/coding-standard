@@ -36,5 +36,10 @@
             "name": "VMaarsson",
             "email": "viktor@maarsson.se"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    }
 }
