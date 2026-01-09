@@ -15,6 +15,9 @@
             "Maarsson\\CodingStandard\\": "src/"
         }
     },
+    "bin": [
+        "bin/sync-coding-standards.php"
+    ],
     "authors": [
         {
             "name": "VMaarsson",
