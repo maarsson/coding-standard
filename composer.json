@@ -11,7 +11,9 @@
         "php": "^8.4"
     },
     "require-dev": {
-        "phpmd/phpmd": "^2.15"
+        "phpmd/phpmd": "^2.15",
+        "squizlabs/php_codesniffer": "^4.0",
+        "slevomat/coding-standard": "^8.26"
     },
     "autoload": {
         "psr-4": {
