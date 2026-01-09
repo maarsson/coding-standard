@@ -8,6 +8,7 @@ This package provides shared code quality rulesets and a sync script that applie
 
 Currently supported:
 - [PHP Mess Detector (PHPMD)](https://phpmd.org/)
+- [PHP CodeSniffer (PHPCS)](https://github.com/PHPCSStandards/PHP_CodeSniffer/)
 
 ---
 
@@ -97,6 +98,7 @@ The sync script copies shared ruleset files from the package into the project ro
 
 Currently applied files:
 - `phpmd.xml`
+- `phpcs.xml`
 
 ### Overwrite behavior
 
@@ -120,6 +122,16 @@ After the sync script runs, `phpmd.xml` will exist in your project root, but you
 Then run the PHPMD check like this:
 
 `./vendor/bin/phpmd . ansi phpmd.xml --suffixes=php --cache --cache-file=.phpmd.cache`
+
+### Using PHPCS with the installed ruleset
+
+After the sync script runs, `phpcs.xml` will exist in your project root, but you need to install the PHPCS itself:
+
+`composer require --dev squizlabs/php_codesniffer`
+
+Then run the PHPCS check like this:
+
+`./vendor/bin/phpcs --parallel=4 --standard=phpcs.xml -d memory_limit=1G --cache=.phpcs.cache .`
 
 ---
 
