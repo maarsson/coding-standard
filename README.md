@@ -109,7 +109,9 @@ This behavior is intentional and ensures consistency across projects. If you nee
 
 ---
 
-## Using PHPMD with the installed ruleset
+## Usage
+
+### Using PHPMD with the installed ruleset
 
 After the sync script runs, `phpmd.xml` will exist in your project root, but you need to install the PHPMD itself:
 
