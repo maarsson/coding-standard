@@ -18,5 +18,18 @@ if (! copy($vendorSourcePhpmd, $targetPhpmd)) {
     exit(1);
 }
 
+$vendorSourcePhpCs = $projectRoot . '/vendor/maarsson/coding-standard/resources/phpcs.xml.dist';
+$targetPhpCs = $projectRoot . '/phpcs.xml';
+
+if (! file_exists($vendorSourcePhpCs)) {
+    fwrite(STDERR, "Source file not found: {$vendorSourcePhpCs}\n");
+    exit(1);
+}
+
+if (! copy($vendorSourcePhpCs, $targetPhpCs)) {
+    fwrite(STDERR, "Failed to copy phpcs.xml to project root.\n");
+    exit(1);
+}
+
 fwrite(STDOUT, "Coding standard rulesets are applied to project.\n");
 exit(0);
