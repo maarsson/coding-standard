@@ -11,7 +11,9 @@
         "php": "^8.4"
     },
     "require-dev": {
-        "phpmd/phpmd": "^2.15"
+        "phpmd/phpmd": "^2.15",
+        "squizlabs/php_codesniffer": "^4.0",
+        "slevomat/coding-standard": "^8.26"
     },
     "autoload": {
         "psr-4": {
@@ -20,10 +22,16 @@
     },
     "scripts": {
         "ci:phpmd-passes": [
-            "./vendor/bin/phpmd test/fixtures/Phpmd/GoodCode ansi resources/phpmd.xml.dist --suffixes=php"
+            "./vendor/bin/phpmd test/fixtures/Phpmd/GoodCode ansi resources/phpmd.xml.dist --suffixes=php --cache --cache-file=.phpmd.cache"
         ],
         "ci:phpmd-fails": [
-            "./vendo/bin/phpmd test/fixtures/Phpmd/BadCode ansi resources/phpmd.xml.dist --suffixes=php"
+            "./vendor/bin/phpmd test/fixtures/Phpmd/BadCode ansi resources/phpmd.xml.dist --suffixes=php --cache --cache-file=.phpmd.cache"
+        ],
+        "ci:phpcs-passes": [
+            "./vendor/bin/phpcs --standard=resources/phpcs.xml.dist --cache=.phpcs.cache test/fixtures/Phpcs/GoodCode"
+        ],
+        "ci:phpcs-fails": [
+            "./vendor/bin/phpcs --standard=resources/phpcs.xml.dist --cache=.phpcs.cache test/fixtures/Phpcs/BadCode"
         ]
     },
     "bin": [
@@ -34,5 +42,10 @@
             "name": "VMaarsson",
             "email": "viktor@maarsson.se"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    }
 }

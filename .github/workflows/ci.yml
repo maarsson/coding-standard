@@ -42,3 +42,41 @@ jobs:
             echo "Expected PHPMD to fail for BadCode fixtures, but it passed."
             exit 1
           fi
+
+  phpcs:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.4', '8.5']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Validate PHPCS ruleset file exists
+        run: test -f resources/phpcs.xml.dist
+
+      - name: PHPCS should pass for GoodCode
+        run: composer ci:phpcs-passes
+
+      - name: PHPCS should fail for BadCode (expected)
+        run: |
+          set +e
+          composer ci:phpcs-fails
+          exit_code=$?
+          set -e
+          if [ $exit_code -eq 0 ]; then
+            echo "Expected PHPCS to fail for BadCode fixtures, but it passed."
+            exit 1
+          fi
