@@ -10,6 +10,9 @@
     "require": {
         "php": "^8.2"
     },
+    "require-dev": {
+        "phpmd/phpmd": "^2.15"
+    },
     "autoload": {
         "psr-4": {
             "Maarsson\\CodingStandard\\": "src/"
