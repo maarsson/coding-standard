@@ -23,7 +23,5 @@
             "name": "VMaarsson",
             "email": "viktor@maarsson.se"
         }
-    ],
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    ]
 }
