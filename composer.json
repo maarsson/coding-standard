@@ -26,6 +26,12 @@
         ],
         "ci:phpmd-fails": [
             "./vendor/bin/phpmd test/fixtures/Phpmd/BadCode ansi resources/phpmd.xml.dist --suffixes=php --cache --cache-file=.phpmd.cache"
+        ],
+        "ci:phpcs-passes": [
+            "./vendor/bin/phpcs --standard=resources/phpcs.xml.dist --cache=.phpcs.cache test/fixtures/Phpcs/GoodCode"
+        ],
+        "ci:phpcs-fails": [
+            "./vendor/bin/phpcs --standard=resources/phpcs.xml.dist --cache=.phpcs.cache test/fixtures/Phpcs/BadCode"
         ]
     },
     "bin": [
