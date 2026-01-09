@@ -1,0 +1,27 @@
+{
+    "name": "maarsson/coding-standard",
+    "description": "Centralized custom coding standards applied among my projects",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "qa",
+        "standards"
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Maarsson\\CodingStandard\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/sync-coding-standards.php"
+    ],
+    "authors": [
+        {
+            "name": "VMaarsson",
+            "email": "viktor@maarsson.se"
+        }
+    ]
+}
