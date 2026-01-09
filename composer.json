@@ -8,12 +8,23 @@
         "standards"
     ],
     "require": {
-        "php": "^8.2"
+        "php": "^8.4"
+    },
+    "require-dev": {
+        "phpmd/phpmd": "^2.15"
     },
     "autoload": {
         "psr-4": {
             "Maarsson\\CodingStandard\\": "src/"
         }
+    },
+    "scripts": {
+        "ci:phpmd-passes": [
+            "./vendor/bin/phpmd test/fixtures/Phpmd/GoodCode ansi resources/phpmd.xml.dist --suffixes=php"
+        ],
+        "ci:phpmd-fails": [
+            "./vendo/bin/phpmd test/fixtures/Phpmd/BadCode ansi resources/phpmd.xml.dist --suffixes=php"
+        ]
     },
     "bin": [
         "bin/sync-coding-standards.php"
