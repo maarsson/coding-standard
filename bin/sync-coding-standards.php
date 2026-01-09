@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 $projectRoot = getcwd(); // when executed from app, this is app root
-$vendorSource = $projectRoot . '/vendor/maarsson/coding-standard/src/phpmd.xml.dist';
+$vendorSource = $projectRoot . '/vendor/maarsson/coding-standard/resources/phpmd.xml.dist';
 $target = $projectRoot . '/phpmd.xml';
 
 if (! file_exists($vendorSource)) {
