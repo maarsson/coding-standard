@@ -100,10 +100,11 @@ jobs:
 
       - name: Prepare path repo for consumer test
         run: |
-          mkdir -p /tmp/sync-smoke/repo
-          rsync -a --delete ./ /tmp/sync-smoke/repo/
+          rm -rf /tmp/coding-standard-consumer-smoke
+          mkdir -p /tmp/coding-standard-consumer-smoke/repo
+          rsync -a --delete ./ /tmp/coding-standard-consumer-smoke/repo/
 
       - name: Run consumer sync smoke test
-        working-directory: /tmp/sync-smoke
+        working-directory: /tmp/coding-standard-consumer-smoke
         run: |
-          /tmp/sync-smoke/repo/test/ci/sync-smoke.sh
+          /tmp/coding-standard-consumer-smoke/repo/test/ci/sync-smoke.sh

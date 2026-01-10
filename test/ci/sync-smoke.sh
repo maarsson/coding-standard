@@ -11,7 +11,7 @@ fail() {
   printf "[\033[31mFAIL\033[0m] %s\n" "$1" >&2;exit 1;
 }
 
-WORKDIR="/tmp/sync-smoke"
+WORKDIR="/tmp/coding-standard-consumer-smoke"
 CONSUMER="$WORKDIR/consumer"
 REPO="$WORKDIR/repo"
 
