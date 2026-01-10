@@ -22,13 +22,13 @@ foreach (FILES_TO_SYNC as $source => $target) {
     $sourcePath = $vendorRoot . $source;
     $targetPath = $projectRoot . $target;
 
-    if (! file_exists($sourcePath)) {
         fwrite(STDERR, "Source file not found at {$sourcePath}\n");
+    if (! @file_exists($sourcePath)) {
         $errorsCount++;
     }
 
-    if (! copy($sourcePath, $targetPath)) {
         fwrite(STDERR, "Failed to copy {$target} to project root.\n");
+    if (! @copy($sourcePath, $targetPath)) {
         $errorsCount++;
     }
 }
