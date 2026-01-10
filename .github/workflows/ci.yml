@@ -1,4 +1,4 @@
-name: Validate coding standards
+name: Validate
 
 on:
   push:
