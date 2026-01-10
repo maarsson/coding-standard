@@ -3,31 +3,38 @@
 
 declare(strict_types=1);
 
+/**
+ * Mapping of ruleset files to be copied:
+ *      source (inside package) => destination (in project root)
+ *
+ * @var array<string, string>
+ */
+const FILES_TO_SYNC = [
+    'resources/phpmd.xml.dist' => 'phpmd.xml',
+    'resources/phpcs.xml.dist' => 'phpcs.xml',
+];
+
 $projectRoot = getcwd(); // when executed from app, this is app root
+$vendorRoot = $projectRoot . '/vendor/maarsson/coding-standard/';
+$errorsCount = 0;
 
-$vendorSourcePhpmd = $projectRoot . '/vendor/maarsson/coding-standard/resources/phpmd.xml.dist';
-$targetPhpmd = $projectRoot . '/phpmd.xml';
+foreach (FILES_TO_SYNC as $source => $target) {
+    $sourcePath = $vendorRoot . $source;
+    $targetPath = $projectRoot . $target;
 
-if (! file_exists($vendorSourcePhpmd)) {
-    fwrite(STDERR, "Source file not found: {$vendorSourcePhpmd}\n");
-    exit(1);
+    if (! file_exists($sourcePath)) {
+        fwrite(STDERR, "Source file not found at {$sourcePath}\n");
+        $errorsCount++;
+    }
+
+    if (! copy($sourcePath, $targetPath)) {
+        fwrite(STDERR, "Failed to copy {$target} to project root.\n");
+        $errorsCount++;
+    }
 }
 
-if (! copy($vendorSourcePhpmd, $targetPhpmd)) {
-    fwrite(STDERR, "Failed to copy phpmd.xml to project root.\n");
-    exit(1);
-}
-
-$vendorSourcePhpCs = $projectRoot . '/vendor/maarsson/coding-standard/resources/phpcs.xml.dist';
-$targetPhpCs = $projectRoot . '/phpcs.xml';
-
-if (! file_exists($vendorSourcePhpCs)) {
-    fwrite(STDERR, "Source file not found: {$vendorSourcePhpCs}\n");
-    exit(1);
-}
-
-if (! copy($vendorSourcePhpCs, $targetPhpCs)) {
-    fwrite(STDERR, "Failed to copy phpcs.xml to project root.\n");
+if ($errorsCount > 0) {
+    fwrite(STDERR, "There were errors during the process.\n");
     exit(1);
 }
 
