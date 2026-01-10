@@ -23,8 +23,8 @@ cd "$CONSUMER"
 info "Writing consumer composer.json (path repository)…"
 cat > composer.json <<'JSON'
 {
-  "name": "maarsson/consumer-smoke",
-  "description": "CI consumer project for testing maarsson/coding-standard sync",
+  "name": "maarsson/coding-standard-consumer-smoke",
+  "description": "CI consumer project for testing maarsson/coding-standard package functions",
   "type": "project",
   "require": {
     "php": "^8.4"
@@ -65,4 +65,4 @@ echo "local change" >> phpmd.xml
 ./vendor/bin/sync-coding-standards.php
 cmp -s phpmd.xml ./vendor/maarsson/coding-standard/resources/phpmd.xml.dist || fail "phpcs.xml overwrite error"
 
-ok "Sync smoke test passed."
+ok "Consumer smoke test passed."

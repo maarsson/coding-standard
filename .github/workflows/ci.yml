@@ -82,7 +82,7 @@ jobs:
           fi
 
   sync-smoke:
-    name: Sync smoke test
+    name: Consumer smoke test
     runs-on: ubuntu-latest
 
     steps:
