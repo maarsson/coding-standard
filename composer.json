@@ -1,6 +1,6 @@
 {
     "name": "maarsson/coding-standard",
-    "description": "Centralized custom coding standards applied among my projects",
+    "description": "Centralized custom coding standards applied across my projects",
     "type": "library",
     "license": "MIT",
     "keywords": [
