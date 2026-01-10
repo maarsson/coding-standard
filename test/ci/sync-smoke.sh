@@ -5,10 +5,10 @@ info() {
   printf "[\033[34mINFO\033[0m] %s\n" "$1"
 }
 ok() {
-  printf "[\033[32mINFO\033[0m] %s\n" "$1"
+  printf "[\033[32m OK \033[0m] %s\n" "$1"
 }
 fail() {
-  printf "[\033[31mINFO\033[0m] %s\n" "$1"
+  printf "[\033[31mFAIL\033[0m] %s\n" "$1"
 }
 
 # Work under a predictable directory so ../../repo resolves
