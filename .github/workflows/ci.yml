@@ -111,7 +111,7 @@ jobs:
       - name: PHP-CS-FIXER should fail for BadCode (expected)
         run: |
           set +e
-          composer ci:phpcs-fails
+          composer ci:phpcsfixer-fails
           exit_code=$?
           set -e
           if [ $exit_code -eq 0 ]; then
