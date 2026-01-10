@@ -81,7 +81,7 @@ jobs:
             exit 1
           fi
 
-  sync-smoke:
+  consumer-smoke:
     name: Consumer smoke test
     runs-on: ubuntu-latest
 
@@ -104,7 +104,7 @@ jobs:
           mkdir -p /tmp/coding-standard-consumer-smoke/repo
           rsync -a --delete ./ /tmp/coding-standard-consumer-smoke/repo/
 
-      - name: Run consumer sync smoke test
+      - name: Run consumer smoke test
         working-directory: /tmp/coding-standard-consumer-smoke
         run: |
-          /tmp/coding-standard-consumer-smoke/repo/test/ci/sync-smoke.sh
+          /tmp/coding-standard-consumer-smoke/repo/test/ci/consumer-smoke.sh
