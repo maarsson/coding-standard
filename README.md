@@ -1,15 +1,14 @@
 # maarsson/coding-standard
 
-Centralized custom coding standards that can be applied across different projects.
+Centralized custom coding standards that can be applied across my different projects.
 
 <div aria-hidden="true">
 
 [![Latest Stable Version](https://img.shields.io/github/v/release/maarsson/coding-standard?label=Latest)](https://github.com/maarsson/coding-standard/releases)
-[![Test](https://github.com/maarsson/coding-standard/actions/workflows/ci.yml/badge.svg?branch=master)][GHA-test]
-[![License](https://img.shields.io/github/license/maarsson/coding-standard)](https://github.com/maarsson/coding-standard/blob/master/LICENSE)
-
 ![Minimum PHP Version](https://img.shields.io/packagist/dependency-v/maarsson/coding-standard/php.svg)
 [![Tested on PHP 8,4 to 8.5](https://img.shields.io/badge/tested%20on-PHP%208.4%20|%208.5-brightgreen.svg?maxAge=2419200)][GHA-test]
+[![Test](https://github.com/maarsson/coding-standard/actions/workflows/ci.yml/badge.svg?branch=master)][GHA-test]
+[![License](https://img.shields.io/github/license/maarsson/coding-standard)](https://github.com/maarsson/coding-standard/blob/master/LICENSE)
 
 [GHA-test]: https://github.com/maarsson/coding-standard/actions/workflows/ci.yml
 
