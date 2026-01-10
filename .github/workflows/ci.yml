@@ -80,3 +80,30 @@ jobs:
             echo "Expected PHPCS to fail for BadCode fixtures, but it passed."
             exit 1
           fi
+
+  sync-smoke:
+    name: Sync smoke test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
+
+      - name: Install repo dependencies (optional)
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Prepare path repo for consumer test
+        run: |
+          mkdir -p /tmp/sync-smoke/repo
+          rsync -a --delete ./ /tmp/sync-smoke/repo/
+
+      - name: Run consumer sync smoke test
+        working-directory: /tmp/sync-smoke
+        run: |
+          /tmp/sync-smoke/repo/test/ci/sync-smoke.sh
