@@ -1,6 +1,6 @@
 # maarsson/coding-standard
 
-Centralized custom coding standards that can be applied across different projects.
+Centralized custom coding standards that can be applied across my different projects.
 
 <div aria-hidden="true">
 
