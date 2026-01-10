@@ -1,0 +1,65 @@
+#!/usr/bin/env sh
+set -eu
+
+info() {
+  printf "[\033[34mINFO\033[0m] %s\n" "$1"
+}
+ok() {
+  printf "[\033[32mINFO\033[0m] %s\n" "$1"
+}
+fail() {
+  printf "[\033[31mINFO\033[0m] %s\n" "$1"
+}
+
+info "Creating temp consumer project…"
+TMP_DIR="$(mktemp -d)"
+CONSUMER="$TMP_DIR/consumer"
+mkdir -p "$CONSUMER"
+cd "$CONSUMER"
+
+info "Writing consumer composer.json (path repository)…"
+cat > composer.json <<'JSON'
+{
+  "name": "maarsson/consumer-smoke",
+  "description": "CI consumer project for testing maarsson/coding-standard sync",
+  "type": "project",
+  "require": {
+    "php": "^8.4"
+  },
+  "require-dev": {
+    "maarsson/coding-standard": "*"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../../repo",
+      "options": {
+        "symlink": false
+      }
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
+JSON
+
+info "Installing dependencies…"
+composer install --no-interaction --prefer-dist
+
+info "Running sync script…"
+./vendor/bin/sync-coding-standards.php
+
+info "Asserting files exist in project root…"
+test -f phpmd.xml
+test -f phpcs.xml
+
+info "Asserting files match package dist versions…"
+cmp -s phpmd.xml ./vendor/maarsson/coding-standard/resources/phpmd.xml.dist
+cmp -s phpcs.xml ./vendor/maarsson/coding-standard/resources/phpcs.xml.dist
+
+info "Asserting always-overwrite behavior…"
+echo "local change" >> phpmd.xml
+./vendor/bin/sync-coding-standards.php
+cmp -s phpmd.xml ./vendor/maarsson/coding-standard/resources/phpmd.xml.dist
+
+ok "Sync smoke test passed."
