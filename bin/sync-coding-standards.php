@@ -25,6 +25,8 @@ foreach (FILES_TO_SYNC as $source => $target) {
         fwrite(STDERR, "Source file not found at {$sourcePath}\n");
     if (! @file_exists($sourcePath)) {
         $errorsCount++;
+
+        continue;
     }
 
         fwrite(STDERR, "Failed to copy {$target} to project root.\n");
