@@ -29,7 +29,7 @@ fwrite(STDOUT, '[' . CLI_COLORS['blue'] . 'INFO' . CLI_COLORS['reset'] . '] Sync
 
 foreach (FILES_TO_SYNC as $source => $target) {
     $sourcePath = $vendorRoot . $source;
-    $targetPath = $projectRoot . $target;
+    $targetPath = $projectRoot . '/' . $target;
 
     if (! @file_exists($sourcePath)) {
         fwrite(STDERR, '[' . CLI_COLORS['red'] . 'FAIL' . CLI_COLORS['reset'] . '] Source file not found at ' . $sourcePath . PHP_EOL);
