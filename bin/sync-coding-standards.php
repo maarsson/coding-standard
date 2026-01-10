@@ -22,23 +22,23 @@ foreach (FILES_TO_SYNC as $source => $target) {
     $sourcePath = $vendorRoot . $source;
     $targetPath = $projectRoot . $target;
 
-        fwrite(STDERR, "Source file not found at {$sourcePath}\n");
     if (! @file_exists($sourcePath)) {
+        fwrite(STDERR, 'Source file not found at ' . $sourcePath . PHP_EOL);
         $errorsCount++;
 
         continue;
     }
 
-        fwrite(STDERR, "Failed to copy {$target} to project root.\n");
     if (! @copy($sourcePath, $targetPath)) {
+        fwrite(STDERR, 'Failed to copy ' . $target . ' to project root.' . PHP_EOL);
         $errorsCount++;
     }
 }
 
 if ($errorsCount > 0) {
-    fwrite(STDERR, "There were errors during the process.\n");
+    fwrite(STDERR, 'There were errors during the process.' . PHP_EOL);
     exit(1);
 }
 
-fwrite(STDOUT, "Coding standard rulesets are applied to project.\n");
+fwrite(STDOUT, 'Coding standard rulesets are applied to project.' . PHP_EOL);
 exit(0);
