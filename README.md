@@ -6,10 +6,12 @@ Centralized custom coding standards that can be applied across different project
 
 This package provides shared code quality rulesets and a sync script that applies them to consumer projects in a predictable and consistent way.
 
+By following the installation steps below, the rulesets are automatically applied after composer install and composer update in your project. This guarantees that all projects use the exact same ruleset versions.
+
 Currently supported:
-- [PHP Mess Detector (PHPMD)](https://phpmd.org/)
-- [PHP CodeSniffer (PHPCS)](https://github.com/PHPCSStandards/PHP_CodeSniffer/)
-- [PHP CS Fixer](https://cs.symfony.com/)
+- [PHP Mess Detector (PHPMD)](https://phpmd.org/) - detect design and complexity issues
+- [PHP CodeSniffer (PHPCS)](https://github.com/PHPCSStandards/PHP_CodeSniffer/) - detect coding standard violations
+- [PHP CS Fixer](https://cs.symfony.com/) - automatically enforce modern code style
 
 ---
 
