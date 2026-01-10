@@ -81,6 +81,44 @@ jobs:
             exit 1
           fi
 
+  phpcsfixer:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.4', '8.5']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Validate PHP-CS-FIXER ruleset file exists
+        run: test -f resources/php-cs-fixer.php.dist
+
+      - name: PHP-CS-FIXER should pass for GoodCode
+        run: composer ci:phpcsfixer-passes
+
+      - name: PHP-CS-FIXER should fail for BadCode (expected)
+        run: |
+          set +e
+          composer ci:phpcsfixer-fails
+          exit_code=$?
+          set -e
+          if [ $exit_code -eq 0 ]; then
+            echo "Expected PHP-CS-FIXER to fail for BadCode fixtures, but it passed."
+            exit 1
+          fi
+
   consumer-smoke:
     name: Consumer smoke test
     runs-on: ubuntu-latest

@@ -1,6 +1,6 @@
 {
     "name": "maarsson/coding-standard",
-    "description": "Centralized custom coding standards applied among my projects",
+    "description": "Centralized custom coding standards applied across my projects",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -14,7 +14,8 @@
     "require-dev": {
         "phpmd/phpmd": "^2.15",
         "squizlabs/php_codesniffer": "^4.0",
-        "slevomat/coding-standard": "^8.26"
+        "slevomat/coding-standard": "^8.26",
+        "friendsofphp/php-cs-fixer": "^3.92"
     },
     "autoload": {
         "psr-4": {
@@ -33,6 +34,12 @@
         ],
         "ci:phpcs-fails": [
             "./vendor/bin/phpcs --standard=resources/phpcs.xml.dist --cache=.phpcs.cache test/fixtures/Phpcs/BadCode"
+        ],
+        "ci:phpcsfixer-passes": [
+            "./vendor/bin/php-cs-fixer fix  --dry-run  --config=resources/php-cs-fixer.php.dist  --cache-file=.php-cs-fixer.cache test/fixtures/PhpcsFixer/GoodCode"
+        ],
+        "ci:phpcsfixer-fails": [
+            "./vendor/bin/php-cs-fixer fix  --dry-run  --config=resources/php-cs-fixer.php.dist  --cache-file=.php-cs-fixer.cache test/fixtures/PhpcsFixer/BadCode"
         ]
     },
     "bin": [
