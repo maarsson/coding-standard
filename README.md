@@ -115,37 +115,39 @@ This behavior is intentional and ensures consistency across projects. If you nee
 
 ## Usage
 
+After the sync script runs, the ruleset files will exist in your project root, but the corresponding tools must also be installed. However if you installed the package via `maarsson/dev-tools` you don’t need to install these manually. Otherwise run:
+
+```sh
+composer require --dev phpmd/phpmd
+composer require --dev squizlabs/php_codesniffer
+composer require --dev friendsofphp/php-cs-fixer
+```
+
+Note: `*.cache` should be added to `.gitignore`.
+
 ### Using PHPMD with the installed ruleset
 
-After the sync script runs, `phpmd.xml` will exist in your project root, but you need to install the PHPMD itself:
-
-`composer require --dev phpmd/phpmd`
-
-Then run the PHPMD check like this:
+Run the PHPMD check for displaying violations like this:
 
 `./vendor/bin/phpmd . ansi phpmd.xml --suffixes=php --cache --cache-file=.phpmd.cache`
 
 ### Using PHPCS with the installed ruleset
 
-After the sync script runs, `phpcs.xml` will exist in your project root, but you need to install the PHPCS itself:
-
-`composer require --dev squizlabs/php_codesniffer`
-
-Then run the PHPCS check like this:
+Then run the PHPCS check for displaying violations like this:
 
 `./vendor/bin/phpcs --parallel=4 --standard=phpcs.xml -d memory_limit=1G --cache=.phpcs.cache .`
 
-### Using PHP-CS-FIXER with the installed ruleset
+Or run the PHPCBF (comes with the same package) to actually fix violations like this:
 
-After the sync script runs, `.php-cs-fixer.php` will exist in your project root, but you need to install the PHP-CS-FIXER itself:
+`./vendor/bin/phpcbf --parallel=4 --standard=phpcs.xml -d memory_limit=1G --cache=.phpcs.cache .`
 
-`composer require --dev friendsofphp/php-cs-fixer`
+### Using PHP-CS-Fixer with the installed ruleset
 
-Then run the PHP-CS-FIXER check for displaying violations like this:
+Then run the PHP-CS-Fixer check for displaying violations like this:
 
 `./vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php --cache-file=.php-cs-fixer.cache`
 
-Or run the PHP-CS-FIXER to actually fix violations like this:
+Or run the PHP-CS-Fixer to actually fix violations like this:
 
 `./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --cache-file=.php-cs-fixer.cache`
 
