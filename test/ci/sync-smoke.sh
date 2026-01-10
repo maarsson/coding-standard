@@ -11,9 +11,13 @@ fail() {
   printf "[\033[31mINFO\033[0m] %s\n" "$1"
 }
 
-info "Creating temp consumer project…"
-TMP_DIR="$(mktemp -d)"
-CONSUMER="$TMP_DIR/consumer"
+# Work under a predictable directory so ../../repo resolves
+WORKDIR="/tmp/sync-smoke"
+CONSUMER="$WORKDIR/consumer"
+REPO="$WORKDIR/repo"
+
+info "Preparing consumer project workspace…"
+rm -rf "$CONSUMER"
 mkdir -p "$CONSUMER"
 cd "$CONSUMER"
 
@@ -32,7 +36,7 @@ cat > composer.json <<'JSON'
   "repositories": [
     {
       "type": "path",
-      "url": "../../repo",
+      "url": "../repo",
       "options": {
         "symlink": false
       }
