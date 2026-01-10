@@ -14,31 +14,40 @@ const FILES_TO_SYNC = [
     'resources/phpcs.xml.dist' => 'phpcs.xml',
 ];
 
+const CLI_COLORS = [
+    'green' => "\033[32m",
+    'red' => "\033[31m",
+    'blue' => "\033[34m",
+    'reset' => "\033[0m",
+];
+
 $projectRoot = getcwd(); // when executed from app, this is app root
 $vendorRoot = $projectRoot . '/vendor/maarsson/coding-standard/';
 $errorsCount = 0;
+
+fwrite(STDOUT, '[' . CLI_COLORS['blue'] . 'INFO' . CLI_COLORS['reset'] . '] Syncing coding standard rulesets…' . PHP_EOL);
 
 foreach (FILES_TO_SYNC as $source => $target) {
     $sourcePath = $vendorRoot . $source;
     $targetPath = $projectRoot . $target;
 
     if (! @file_exists($sourcePath)) {
-        fwrite(STDERR, 'Source file not found at ' . $sourcePath . PHP_EOL);
+        fwrite(STDERR, '[' . CLI_COLORS['red'] . 'FAIL' . CLI_COLORS['reset'] . '] Source file not found at ' . $sourcePath . PHP_EOL);
         $errorsCount++;
 
         continue;
     }
 
     if (! @copy($sourcePath, $targetPath)) {
-        fwrite(STDERR, 'Failed to copy ' . $target . ' to project root.' . PHP_EOL);
+        fwrite(STDERR, '[' . CLI_COLORS['red'] . 'FAIL' . CLI_COLORS['reset'] . '] Failed to copy ' . $target . ' to project root.' . PHP_EOL);
         $errorsCount++;
     }
 }
 
 if ($errorsCount > 0) {
-    fwrite(STDERR, 'There were errors during the process.' . PHP_EOL);
+    fwrite(STDERR, '[' . CLI_COLORS['red'] . 'FAIL' . CLI_COLORS['reset'] . '] There were errors during the process.' . PHP_EOL);
     exit(1);
 }
 
-fwrite(STDOUT, 'Coding standard rulesets are applied to project.' . PHP_EOL);
+fwrite(STDOUT, '[' . CLI_COLORS['green'] . ' OK ' . CLI_COLORS['reset'] . '] Coding standard rulesets are applied to project.' . PHP_EOL);
 exit(0);
