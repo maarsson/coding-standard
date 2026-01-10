@@ -11,7 +11,6 @@ fail() {
   printf "[\033[31mFAIL\033[0m] %s\n" "$1"
 }
 
-# Work under a predictable directory so ../../repo resolves
 WORKDIR="/tmp/sync-smoke"
 CONSUMER="$WORKDIR/consumer"
 REPO="$WORKDIR/repo"
