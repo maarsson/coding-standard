@@ -1,15 +1,33 @@
-
-
 # maarsson/coding-standard
 
 Centralized custom coding standards that can be applied across different projects.
 
+<div aria-hidden="true">
+
+[![Latest Stable Version](https://img.shields.io/github/v/release/maarsson/coding-standard?label=Latest)](https://github.com/maarsson/coding-standard/releases)
+[![Test](https://github.com/maarsson/coding-standard/actions/workflows/ci.yml/badge.svg?branch=master)][GHA-test]
+[![License](https://img.shields.io/github/license/maarsson/coding-standard)](https://github.com/maarsson/coding-standard/blob/master/LICENSE)
+
+![Minimum PHP Version](https://img.shields.io/packagist/dependency-v/maarsson/coding-standard/php.svg)
+[![Tested on PHP 8,4 to 8.5](https://img.shields.io/badge/tested%20on-PHP%208.4%20|%208.5-brightgreen.svg?maxAge=2419200)][GHA-test]
+
+[GHA-test]: https://github.com/maarsson/coding-standard/actions/workflows/ci.yml
+
+</div>
+
+> [!NOTE]
+> See also [maarsson/dev-tools](https://github.com/maarsson/dev-tools).
+
+## About
+
 This package provides shared code quality rulesets and a sync script that applies them to consumer projects in a predictable and consistent way.
 
+By following the installation steps below, the rulesets are automatically applied after composer install and composer update in your project. This guarantees that all projects use the exact same ruleset versions.
+
 Currently supported:
-- [PHP Mess Detector (PHPMD)](https://phpmd.org/)
-- [PHP CodeSniffer (PHPCS)](https://github.com/PHPCSStandards/PHP_CodeSniffer/)
-- [PHP CS Fixer](https://cs.symfony.com/)
+- [PHP Mess Detector (PHPMD)](https://phpmd.org/) - detect design and complexity issues
+- [PHP CodeSniffer (PHPCS)](https://github.com/PHPCSStandards/PHP_CodeSniffer/) - detect coding standard violations
+- [PHP CS Fixer](https://cs.symfony.com/) - automatically enforce modern code style
 
 ---
 
@@ -115,37 +133,39 @@ This behavior is intentional and ensures consistency across projects. If you nee
 
 ## Usage
 
+After the sync script runs, the ruleset files will exist in your project root, but the corresponding tools must also be installed. However if you installed the package via `maarsson/dev-tools` you don’t need to install these manually. Otherwise run:
+
+```sh
+composer require --dev phpmd/phpmd
+composer require --dev squizlabs/php_codesniffer
+composer require --dev friendsofphp/php-cs-fixer
+```
+
+Note: `*.cache` should be added to `.gitignore`.
+
 ### Using PHPMD with the installed ruleset
 
-After the sync script runs, `phpmd.xml` will exist in your project root, but you need to install the PHPMD itself:
-
-`composer require --dev phpmd/phpmd`
-
-Then run the PHPMD check like this:
+Run the PHPMD check for displaying violations like this:
 
 `./vendor/bin/phpmd . ansi phpmd.xml --suffixes=php --cache --cache-file=.phpmd.cache`
 
 ### Using PHPCS with the installed ruleset
 
-After the sync script runs, `phpcs.xml` will exist in your project root, but you need to install the PHPCS itself:
-
-`composer require --dev squizlabs/php_codesniffer`
-
-Then run the PHPCS check like this:
+Then run the PHPCS check for displaying violations like this:
 
 `./vendor/bin/phpcs --parallel=4 --standard=phpcs.xml -d memory_limit=1G --cache=.phpcs.cache .`
 
-### Using PHP-CS-FIXER with the installed ruleset
+Or run the PHPCBF (comes with the same package) to actually fix violations like this:
 
-After the sync script runs, `.php-cs-fixer.php` will exist in your project root, but you need to install the PHP-CS-FIXER itself:
+`./vendor/bin/phpcbf --parallel=4 --standard=phpcs.xml -d memory_limit=1G --cache=.phpcs.cache .`
 
-`composer require --dev friendsofphp/php-cs-fixer`
+### Using PHP-CS-Fixer with the installed ruleset
 
-Then run the PHP-CS-FIXER check for displaying violations like this:
+Then run the PHP-CS-Fixer check for displaying violations like this:
 
 `./vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php --cache-file=.php-cs-fixer.cache`
 
-Or run the PHP-CS-FIXER to actually fix violations like this:
+Or run the PHP-CS-Fixer to actually fix violations like this:
 
 `./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --cache-file=.php-cs-fixer.cache`
 
