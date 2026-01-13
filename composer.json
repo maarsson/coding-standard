@@ -41,6 +41,12 @@
         ],
         "ci:phpcsfixer-fails": [
             "./vendor/bin/php-cs-fixer fix  --dry-run  --config=resources/php-cs-fixer.php.dist  --cache-file=.php-cs-fixer.cache test/fixtures/PhpcsFixer/BadCode"
+        ],
+        "ci:larastan-passes": [
+            "./vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=1G --no-progress test/fixtures/Larastan/GoodCode"
+        ],
+        "ci:larastan-fails": [
+            "./vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=1G --no-progress test/fixtures/Larastan/BadCode"
         ]
     },
     "bin": [
