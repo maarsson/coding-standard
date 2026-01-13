@@ -27,6 +27,7 @@ Currently supported:
 - [PHP Mess Detector (PHPMD)](https://phpmd.org/) - detect design and complexity issues
 - [PHP CodeSniffer (PHPCS)](https://github.com/PHPCSStandards/PHP_CodeSniffer/) - detect coding standard violations
 - [PHP CS Fixer](https://cs.symfony.com/) - automatically enforce modern code style
+- [Larastan](https://github.com/larastan/larastan) - catches both obvious & tricky bugs
 
 ---
 
@@ -118,6 +119,7 @@ Currently applied files:
 - `phpmd.xml`
 - `phpcs.xml`
 - `.php-cs-fixer.php`
+- `phpstan.neon`
 
 ### Overwrite behavior
 
@@ -138,6 +140,7 @@ After the sync script runs, the ruleset files will exist in your project root, b
 composer require --dev phpmd/phpmd
 composer require --dev squizlabs/php_codesniffer
 composer require --dev friendsofphp/php-cs-fixer
+composer require --dev larastan/larastan
 ```
 
 Note: `*.cache` should be added to `.gitignore`.
@@ -150,7 +153,7 @@ Run the PHPMD check for displaying violations like this:
 
 ### Using PHPCS with the installed ruleset
 
-Then run the PHPCS check for displaying violations like this:
+Run the PHPCS check for displaying violations like this:
 
 `./vendor/bin/phpcs --parallel=4 --standard=phpcs.xml -d memory_limit=1G --cache=.phpcs.cache .`
 
@@ -160,13 +163,19 @@ Or run the PHPCBF (comes with the same package) to actually fix violations like 
 
 ### Using PHP-CS-Fixer with the installed ruleset
 
-Then run the PHP-CS-Fixer check for displaying violations like this:
+Run the PHP-CS-Fixer check for displaying violations like this:
 
 `./vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php --cache-file=.php-cs-fixer.cache`
 
 Or run the PHP-CS-Fixer to actually fix violations like this:
 
 `./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --cache-file=.php-cs-fixer.cache`
+
+### Using Larastan with the installed ruleset
+
+Run the Larastan check for displaying possible bugs like this:
+
+`./vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=1G --no-progress`
 
 ---
 
