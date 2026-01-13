@@ -141,7 +141,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist
 
       - name: Validate LARASTAN ruleset file exists
-        run: test -f resources/phpstan.neon
+        run: test -f resources/phpstan.neon.dist
 
       - name: LARASTAN should pass for GoodCode
         run: composer ci:larastan-passes
