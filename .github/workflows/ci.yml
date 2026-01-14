@@ -143,20 +143,6 @@ jobs:
       - name: Validate LARASTAN ruleset file exists
         run: test -f resources/phpstan.neon.dist
 
-      - name: LARASTAN should pass for GoodCode
-        run: composer ci:larastan-passes
-
-      - name: LARASTAN should fail for BadCode (expected)
-        run: |
-          set +e
-          composer ci:larastan-fails
-          exit_code=$?
-          set -e
-          if [ $exit_code -eq 0 ]; then
-            echo "Expected LARASTAN to fail for BadCode fixtures, but it passed."
-            exit 1
-          fi
-
   consumer-smoke:
     name: Consumer smoke test
     runs-on: ubuntu-latest

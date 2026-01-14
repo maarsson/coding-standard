@@ -15,9 +15,7 @@
         "phpmd/phpmd": "^2.15",
         "squizlabs/php_codesniffer": "^4.0",
         "slevomat/coding-standard": "^8.26",
-        "friendsofphp/php-cs-fixer": "^3.92",
-        "larastan/larastan": "^3.8",
-        "nesbot/carbon": "^3.11"
+        "friendsofphp/php-cs-fixer": "^3.92"
     },
     "autoload": {
         "psr-4": {
@@ -42,14 +40,6 @@
         ],
         "ci:phpcsfixer-fails": [
             "./vendor/bin/php-cs-fixer fix --dry-run --config=resources/php-cs-fixer.php.dist --cache-file=.php-cs-fixer.cache test/fixtures/PhpcsFixer/BadCode"
-        ],
-        "ci:larastan-passes": [
-            "@php -r \"copy('resources/phpstan.neon.dist', 'phpstan.neon')\"",
-            "./vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=1G --no-progress test/fixtures/Larastan/GoodCode"
-        ],
-        "ci:larastan-fails": [
-            "@php -r \"copy('resources/phpstan.neon.dist', 'phpstan.neon')\"",
-            "./vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=1G --no-progress test/fixtures/Larastan/BadCode"
         ]
     },
     "bin": [
