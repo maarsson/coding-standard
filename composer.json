@@ -16,7 +16,8 @@
         "squizlabs/php_codesniffer": "^4.0",
         "slevomat/coding-standard": "^8.26",
         "friendsofphp/php-cs-fixer": "^3.92",
-        "larastan/larastan": "^3.8"
+        "larastan/larastan": "^3.8",
+        "nesbot/carbon": "^3.11"
     },
     "autoload": {
         "psr-4": {
